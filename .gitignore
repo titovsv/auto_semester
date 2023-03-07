@@ -1,0 +1,5 @@
+*.csv
+tmp
+test*
+__pycache__
+config.py
