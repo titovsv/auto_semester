@@ -92,8 +92,14 @@ def create_semester():
     i = 1
 
     for row in csv_data:
+
+        if row['cat_name'] == '' and row['course_template'] == '':
+            append_list_result(csvrow=i, errors='Rows cat_name and course_template is reqired')
+            i += 1
+            continue
+
         updatecourse = False
-        
+
         if row['cat_name'] != '':
             category_name = row['cat_name']
         elif row['cat_name'] == '' and category_name:
@@ -204,9 +210,22 @@ def create_semester():
             if updatecourse:
                 start=defs.get_timestamp(row['course_start'])
                 end=defs.get_timestamp(row['course_end'])
-                summary = "<div><div>Telegram:&nbsp;<a href=\"" + row['telegram'] + "\">" + row['telegram'] + "</a><br></div><div>EduWiki:&nbsp;<a href=\"" + row['syllabus'] + "\">" + row['syllabus'] + "</a></div></div>"
+                telegram_chat =  row['telegram_chat']
+                telegram_channel = row['telegram_channel']
+                syllabus = row['syllabus']
+                summary = "<div> \
+                                <div> \
+                                    Telegram_chat:&nbsp;<a href=\"" + telegram_chat + "\">" + telegram_chat + "</a><br> \
+                                </div> \
+                                <div> \
+                                    Telegram_channel:&nbsp;<a href=\"" + telegram_channel + "\">" + telegram_channel + "</a><br> \
+                                </div> \
+                                <div> \
+                                    EduWiki:&nbsp;<a href=\"" + syllabus + "\">" + syllabus + "</a> \
+                                </div> \
+                            </div>"
 
-                if row['course_visible'] in 'Yes|yes|1|true':
+                if row['course_visible'] in 'Yes|yes|1|True|true':
                     course_visible = '1'
                 else:
                     course_visible = '0'

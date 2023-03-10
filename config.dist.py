@@ -13,3 +13,4 @@ COURSE_REPORTS_ENDPOINT = "/report/view.php?courseid="
 COURSE_MOD_ATTENDANCE_ENDPOITN = "/mod/attendance/manage.php?id="
 
 CATALOG_FOR_RESULT = "tmp"
+DATE_FORMAT = "%d.%m.%Y"

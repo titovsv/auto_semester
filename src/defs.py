@@ -43,11 +43,15 @@ def clear_console():
 
 def get_timestamp(str_date):
     ts = int(time.mktime(datetime.datetime.strptime(
-        str_date, "%d.%m.%Y").timetuple()))
+        str_date, config.DATE_FORMAT).timetuple()))
     return ts
 
 
 def create_file():
+
+    if create_catalog() == False:
+        return
+
     now = datetime.datetime.now()
     date_time = now.strftime("%Y%m%d%H%M%S")
     file_name = config.CATALOG_FOR_RESULT + '/result_' + date_time + '.csv'
@@ -74,3 +78,20 @@ def write_row_to_csv(file_name, dict):
         print("I/O error")
 
     return True
+
+def create_catalog():
+
+    if config.CATALOG_FOR_RESULT == '':
+        catalog = 'tmp'
+    else:
+        catalog = config.CATALOG_FOR_RESULT
+
+    if os.path.exists(catalog):
+        return True
+
+    try:
+        os.mkdir(catalog)
+        return True
+    except OSError as error:
+        print(error)
+        return False
