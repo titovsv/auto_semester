@@ -451,7 +451,7 @@ def update_course(**kwargs):
 def get_category_id(criteria_value, criteria_key='idnumber'):
     call = http_request.call
     result = call('core_course_get_categories', criteria=[
-        {'key': criteria_key, 'value': criteria_value}])
+        {'key': criteria_key, 'value': criteria_value}], addsubcategories=0)
 
     if (len(result) > 0):
         if ('id' in result[0]):
