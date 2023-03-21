@@ -1,5 +1,6 @@
-from requests import get, post
+from requests import post
 import config
+
 
 def rest_api_parameters(in_args, prefix='', out_dict=None):
     """Transform dictionary/array structure to a flat dictionary, with key names
@@ -9,7 +10,7 @@ def rest_api_parameters(in_args, prefix='', out_dict=None):
     {'courses[0][id]':1,
      'courses[0][name]':'course1'}
     """
-    if out_dict == None:
+    if out_dict is None:
         out_dict = {}
     if not type(in_args) in (list, dict):
         out_dict[prefix] = in_args
@@ -38,6 +39,4 @@ def call(fname, **kwargs):
         {"wstoken": config.KEY, 'moodlewsrestformat': 'json', "wsfunction": fname})
     response = post(config.URL+config.ENDPOINT, parameters, timeout=120)
     response = response.json()
-    if type(response) == dict and response.get('exception'):
-        raise SystemError("Error calling Moodle API\n", response)
     return response

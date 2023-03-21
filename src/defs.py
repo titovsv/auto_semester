@@ -3,7 +3,7 @@ import platform
 import time
 import datetime
 import config
-from csv import writer, DictWriter
+from csv import DictWriter
 
 
 class bcolors:
@@ -30,11 +30,11 @@ def print_ext(str, state):
 
 
 def clear_console():
-    opsystem = platform.system()
+    op_system = platform.system()
 
-    if opsystem.lower() == 'windows':
+    if op_system.lower() == 'windows':
         run_command = 'cls'
-    elif opsystem.lower() == 'linux':
+    elif op_system.lower() == 'linux':
         run_command = 'clear'
 
     def clear(): return os.system(run_command)
@@ -49,7 +49,7 @@ def get_timestamp(str_date):
 
 def create_file():
 
-    if create_catalog() == False:
+    if create_catalog() is False:
         return
 
     now = datetime.datetime.now()
@@ -70,7 +70,8 @@ def write_row_to_csv(file_name, dict):
 
     try:
         with open(file_name, 'w', newline='') as csvfile:
-            writer = DictWriter(csvfile, fieldnames=dict[0].keys(), dialect='excel', delimiter=';')
+            writer = DictWriter(csvfile, fieldnames=dict[0].keys(),
+                                dialect='excel', delimiter=';')
             writer.writeheader()
             for data in dict:
                 writer.writerow(data)
@@ -78,6 +79,7 @@ def write_row_to_csv(file_name, dict):
         print("I/O error")
 
     return True
+
 
 def create_catalog():
 
