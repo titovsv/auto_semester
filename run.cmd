@@ -6,8 +6,8 @@ IF errorlevel 1 GOTO errorNoPython
 GOTO noError
 
 :noError
-pip install -r ./requirments.txt
-python ./src/__main__.py
+pip install -r ./requirments.txt 2>NUL
+python ./src
 PAUSE
 exit
 
