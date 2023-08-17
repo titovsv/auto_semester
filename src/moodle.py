@@ -46,7 +46,7 @@ def create_semester():
     except IsADirectoryError:
         print(f"{path_to_file} is a directory!")
         return
-    csv_data = list(csv.DictReader(csv_file, delimiter=";"))
+    csv_data = list(csv.DictReader(csv_file, delimiter=","))
 
     list_from_csv = list()  # From this list will display user csv file content
 
